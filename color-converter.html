@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+	<link rel="canonical" href="http://www.mediaevent.de/css/farbrechner.html" />
+	<title>CSS Farbrechner: HSL nach RGB, HSV nach HSL | mediaevent.de</title>
+	<meta name="description" content="HSL- und HSV-Farbraum sind intiuitiver für das Webdesign als RGB oder gar Hex. Aber Photoshop HSV ist nicht CSS HSL." />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic' rel='stylesheet' type='text/css'>
+<style>
+body{padding:0;margin:0;line-height:146%;color:rgb(90,90,90);font-size:112%;font-family: 'Roboto', sans-serif;font-weight:300}
+.reframe{width:300px;min-width:300px;margin:0 auto}
+.top-menu{list-style-type:none;margin-top:0;margin-bottom:0;height:40px;background:rgb(178,206,143);width:100%}
+.top-menu ul {margin-top:0;padding-top:10px}
+.top-menu li{display:inline}
+.top-menu a{color:white;padding:10px 15px 15px 0;font-size:1em}
+.moreNav{width:50px;height:20px;border-radius:4px;border:3px solid silver;margin-left:auto;margin-right:auto}
+.inN{ width:30px;height:5px;background:silver;margin:4px auto;border-radius:3px}
+#top-logo {position:relative;float:left;display:inline-block;width:120px;height:81px}
+.tlogo{height:85px;padding-top:5px;overflow:hidden}
+h1{font-size:1.1em;margin-left:134px}
+h1 a{color:rgb(178,206,143)}
+h1,h2,h3,h4,h5,h6{font-weight:400;line-height:140%}
+.assistive-text{display:none}
+nav#gatonav{min-height:80px;display:block;position:relative;background:#F3F2F2}
+nav#gatonav:after{content:'eof';display:block;clear:both;height:0;visibility:hidden}
+ul#menu-nav{list-style-type:none;margin:0;padding:0}
+ul#menu-nav li{text-transform:uppercase;display:inline;float:left;font-size:0.96em;height:70px;width:48%;border:1px solid gainsboro;border-right:white;border-bottom:none;background:#F3F2F2;margin:0;padding:0;line-height:120%;border-top:4px solid #F7F5EE}
+ul#menu-nav li a{color:#999;display:block;height:2em;padding:1ex;margin:0}
+ul#menu-nav li:hover{background:gainsboro;border-top:4px solid rgb(178,206,143)}
+#secondary .adsresponsive { width: 300px; height: 250px }
+@media only screen and (min-width:460px){body{line-height:130%}.reframe{width:450px;min-width:450px}}
+@media only screen and (min-width:740px){body{line-height:140%}.reframe{width:720px;min-width:720px}ul#menu-nav li{font-size:1em;width:33%}}
+@media only screen and (min-width:980px){.reframe{max-width:960px;min-width:960px}ul#menu-nav li{width:16%}#secondary .adsresponsive { width: 332px; height: 280px; } }
+@media only screen and (min-width:1280px){body{font-size:106%}.reframe{width:1260px;min-width:1260px}ul#menu-nav li {font-size:1.1em}}
+@media only screen and (min-width:1440px){body{font-size:104%}.reframe{width:1400px;min-width:1400px}}
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/themes/cantate/style.css" type="text/css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="/wp-content/themes/cantate/css/ie.css" type='text/css' />
+<script src="/dist/html5shiv.js" defer></script>
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" href="/wp-content/themes/cantate/css/ie9.css" type='text/css' />
+<![endif]-->
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+<link rel="publisher" href="https://plus.google.com/109551741815349246449" />
+<link rel="author" href="https://plus.google.com/109551741815349246449" />
+
+<style>
+#aside{background:gainsboro;width:280px;height:260px;color:rgb(80,80,80);float:right;font-size:1.2em; padding:10px;border-radius:4px;line-height:150%;}
+#color{width:80%;padding-top: 80px;height:100px;padding:10px;margin-left:auto;margin-right:auto;margin-top:20px;border-radius:4px;}
+
+#colorField{border-radius:6px;background:silver;color:white;width:60%;max-width:280px;height:100px;margin:2em auto 2em auto;padding-top:10px;text-align:center;font-size:1.2em}
+
+#bg{width:100%;text-align:center}
+
+#backgroundColor{width:90%;max-width:650px;margin-left:auto;margin-right:auto;
+border:4px solid silver;border-radius:4px;text-align:center;padding-top:10px}
+
+input[type="range"]{width:95%;height:16px;padding:0;margin:0;}
+input[type="range"]{
+-webkit-appearance:none;
+background-color:gray;border-radius:5px;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.6)}
+
+input[type="range"]::-webkit-slider-thumb{
+-webkit-appearance:none;
+width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:1px 2px 3px rgba(0,0,0,0.6)}
+
+input[type="range"]::-moz-range-thumb{color:orange;}
+input[type="number"]{width:80px;}
+.slider{display:block;float:left;width:32%;height:40px;text-align:center;border-radius:4px;height:50px;padding-top:20px;border:1px solid gainsboro;}
+
+#sliderR{
+background-image:-webkit-linear-gradient(top left, rgb(0,0,0) 0%, rgb(255,0,0) 100%);
+background-image:-moz-linear-gradient(top left, rgb(0,0,0) 0%, rgb(255,0,0) 100%);
+background-image:-ms-linear-gradient(top left, rgb(0,0,0) 0%, rgb(255,0,0) 100%);
+background-image:linear-gradient(top left, rgb(0,0,0) 0%, rgb(255,0,0) 100%)}
+
+#sliderG{
+background-image:-webkit-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,255,0) 100%);
+background-image:-moz-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,255,0) 100%);
+background-image:-ms-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,255,0) 100%);
+background-image:linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,255,0) 100%);
+margin-left:2px}
+
+#sliderB{
+background-image:-webkit-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,0,255) 100%);
+background-image:-moz-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,0,255) 100%);
+background-image:-ms-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,0,255) 100%);
+background-image:-linear-gradient(top left, rgb(0,0,0) 0%, rgb(0,0,255) 100%);
+margin-left:2px}
+
+#sliderH{
+background-image:-webkit-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:-moz-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:-ms-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);}
+
+#sliderS{
+background-image:-webkit-linear-gradient(left, hsl(0,0%,50%) 0%, hsl(0,50%,50%) 100%);margin-left:2px;
+background-image:-moz-linear-gradient(left, hsl(0,0%,50%) 0%, hsl(0,50%,50%) 100%);margin-left:2px;
+background-image:-ms-linear-gradient(left, hsl(0,0%,50%) 0%, hsl(0,50%,50%) 100%);margin-left:2px;
+background-image:linear-gradient(left, hsl(0,0%,50%) 0%, hsl(0,50%,50%) 100%);margin-left:2px}
+
+#sliderL{
+background-image:-webkit-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 50%, hsl(0,0%,100%) 100%);
+background-image:-moz-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 50%, hsl(0,0%,100%) 100%);
+background-image:-ms-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 50%, hsl(0,0%,100%) 100%);
+background-image:linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 50%, hsl(0,0%,100%) 100%);
+margin-left:2px}
+
+#sliderHV{
+background-image:-webkit-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:-moz-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:-ms-linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%);
+background-image:linear-gradient(left, hsl(0,80%,50%) 0%, hsl(30,80%,50%) 8%, hsl(60,80%,50%) 16%, hsl(90,80%,50%) 24%, hsl(120,80%,50%) 32%, hsl(150,80%,50%) 40%, hsl(180,80%,50%) 48%, hsl(210,80%,50%) 56%, hsl(240,80%,50%) 64%, hsl(270,80%,50%) 72%, hsl(300,80%,50%) 80%,hsl(330,80%,50%) 90%)}
+
+#sliderSV{
+background-image:-webkit-linear-gradient(left, hsl(0,0%,100%) 0%, hsl(0,50%,50%) 100%);
+background-image:-moz-linear-gradient(left, hsl(0,0%,100%) 0%, hsl(0,50%,50%) 100%);
+background-image:-ms-linear-gradient(left, hsl(0,0%,100%) 0%, hsl(0,50%,50%) 100%);
+background-image:linear-gradient(left, hsl(0,0%,100%) 0%, hsl(0,50%,50%) 100%);
+margin-left:2px}
+
+#sliderV{
+background-image:-webkit-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 100%);
+background-image:-moz-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 100%);
+background-image:-ms-linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 100%);
+background-image:linear-gradient(left, hsl(0,0%,0%) 0%, hsl(0,50%,50%) 100%);
+margin-left:2px}
+
+.colorsystem{margin-bottom:1.4em;clear:both;height:100px;margin-left:1%;}
+.text{font-size:2em;font-weight:bold;color:gainsboro;text-align:center;margin-left:auto;margin-right:auto;line-height:100%;}
+label{cursor:pointer;}
+.hexAndName{text-align:center;margin-bottom:1.4em;}
+#hex, #farbname{width:6em;border:none;outline:none;background:hsla(0,0%,90%,0.2);font-size:1.2em;}
+.example{width:136px;height:20px;padding-top:70px;text-align:center;border:2px solid gainsboro;float:left;font-size:0.84em;color:white;border-radius:3px;}
+
+</style>
+</head>
+<body>
+
+<div id="main">
+	<div id="content">
+
+<article itemscope itemtype="http://schema.org/TechArticle">
+	<div id="postheader">
+
+		
+<div class="entry-content">
+	<div class="colorsystem">
+	<div class="text">RGB</div>
+	<div class="slider" id="sliderR" style="border-bottom:8px solid red;">
+		<input onkeypress="checkEnter()" type="number" class="rgb" name="r" id="r" placeholder="128" min="0" max="255">
+		<input type="range" class="rgb" name="red" id="red" min="0" max="255" step="1" value="" />
+	</div>	
+	<div class="slider" id="sliderG" style="border-bottom:8px solid green;">
+		<input onkeypress="checkEnter()" type="number" class="rgb" name="g" id="g" placeholder="128" min="0" max="255">
+		<input type="range" class="rgb" name="green" id="green" min="0" max="255" step="1"value="" />
+	</div>
+	<div class="slider" id="sliderB" style="border-bottom:8px solid blue;">
+		<input onkeypress="checkEnter()" type="number" class="rgb" name="b" id="b" placeholder="128" min="0" max="255">
+		<input type="range" class="rgb" name="blue" id="blue" min="0" max="255" step="1" value="" />
+	</div>
+</div>
+
+<div class="colorsystem">
+	<div class="text">HSL (WEB)</div>
+	<div class="slider" id="sliderH">
+		<input onkeypress="checkEnter()" id="hslh" class="hsl" placeholder="0" type="number"  min="0" max="359">
+		<input type="range" class="hsl" id="hue" min="0" max="359" step="1" value="0" />
+	</div>
+	<div class="slider" id="sliderS">
+		<input onkeypress="checkEnter()" id="hsls" class="hsl" placeholder="0" type="number" min="0" max="100">
+		<input type="range" class="hsl" id="sat" min="0" max="100" step="1" value="0" />
+	</div>
+	<div class="slider" id="sliderL">
+		<input onkeypress="checkEnter()" id="hsll" class="hsl" placeholder="50" type="number" min="0" max="100">
+		<input type="range" class="hsl" id="lig" min="0" max="100" step="1" value="50" />
+	</div>
+</div>
+
+<div class="colorsystem">
+	<div class="text">HSB (Photoshop)</div>
+	<div class="slider" id="sliderHV">
+		<input onkeypress="checkEnter()" id="hsvh" class="hsv" placeholder="0" type="number" min="0" max="359">
+		<input type="range" class="hsv" id="huev" min="0" max="359" step="1" value="0" />
+	</div>
+	<div class="slider" id="sliderSV">
+		<input onkeypress="checkEnter()" id="hsvs" class="hsv" placeholder="50" type="number" min="0" max="100">
+		<input type="range" class="hsv" id="satv" min="0" max="100" step="1" value="50" />
+	</div>
+	<div class="slider" id="sliderV">
+		<input onkeypress="checkEnter()" id="hsvv" class="hsv" placeholder="50" type="number" min="0" max="100">
+		<input type="range" class="hsv" id="valv" min="0" max="100" step="1" value="50" />
+	</div>
+</div>
+
+<div id="bg">
+<label><input type="checkbox" id="background" onchange="setBackgroundColor()"> Als background </label>
+<label><input type="checkbox" id="foreground" onchange="setForegroundColor()"> Als color</label>
+</div>
+
+<div id="backgroundColor">
+	<span style="font-size:2em;color:gray;font-weight:bold">background</span>
+	<div id="colorField">
+		<div class="hexAndName">
+			<div>#<input onkeypress="checkEnter()" type="text" name="hex" id="hex" class="hex" placeholder="Hex" value=""></div>
+			<div><span style="visibility:hidden">#</span><input onkeypress="checkEnter()" class="farbname" type="text" name="farbname" id="farbname" placeholder="Farbname" vlaue=""></div>
+		</div>
+	</div>
+</div>
+
+
+</div>
+	</div> <!-- postheader -->
+</article>
+</div> <!-- content -->
+</div> <!-- main -->
+<!-- begin rightbar -->
+
+
+</div><!-- secondary -->
+</div><!-- page -->
+
+<script>
+var rs = document.getElementById('red').value;
+var gs = document.getElementById('green').value;
+var bs = document.getElementById('blue').value;
+document.querySelector('#colorField').setAttribute('style','background:rgb(' + rs + ',' + gs + ',' + bs + ')');
+
+function checkEnter(e){
+	e = e || window.event;
+	if (e.keyCode == '13'){
+		e.srcElement.blur();
+		return false;
+	}
+	return false;
+}
+
+// Initialize
+color();
+
+// Farbname input changed
+document.getElementById('farbname').addEventListener ('change', function(evt){
+rs = nameToRGB(this.value)[0];
+gs = nameToRGB(this.value)[1];
+bs = nameToRGB(this.value)[2];
+color(evt);
+},true);
+
+// HEX input changed
+document.getElementById('hex').addEventListener ('change',function(evt){
+rs = hexToRGB(this.value)[0];
+gs = hexToRGB(this.value)[1];
+bs = hexToRGB(this.value)[2];
+color(evt)},true);
+
+// RGB number changed
+document.getElementById('r').addEventListener ('change', function(evt){
+document.getElementById('red').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('g').addEventListener ('change', function(evt){
+document.getElementById('green').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('b').addEventListener ('change', function(evt){
+document.getElementById('blue').value = this.value;
+color(evt);
+},true);
+
+
+// HSL number changed
+document.getElementById('hslh').addEventListener ('change', function(evt){
+document.getElementById('hue').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('hsls').addEventListener ('change', function(evt){
+document.getElementById('sat').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('hsll').addEventListener ('change', function(evt){
+document.getElementById('lig').value = this.value;
+color(evt);
+},true);
+
+
+// HSV number changed
+document.getElementById('hsvh').addEventListener ('change', function(evt){
+document.getElementById('huev').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('hsvs').addEventListener ('change', function(evt){
+document.getElementById('satv').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('hsvv').addEventListener ('change', function(evt){
+document.getElementById('valv').value = this.value;
+color(evt);
+},true);
+
+document.getElementById('red').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('green').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('blue').addEventListener ('change',function(evt){color(evt)},true);
+
+document.getElementById('hue').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('sat').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('lig').addEventListener ('change',function(evt){color(evt)},true);
+
+document.getElementById('huev').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('satv').addEventListener ('change',function(evt){color(evt)},true);
+document.getElementById('valv').addEventListener ('change',function(evt){color(evt)},true);
+
+function setBackgroundColor (){
+	var s = document.getElementById('background').checked;
+	if (s){
+		rs = document.getElementById('red').value;
+		gs = document.getElementById('green').value;
+		bs = document.getElementById('blue').value;
+		var lightness = rgbToHsl(rs,gs,bs)[2] * 100;
+		var boxShadow = Math.round((lightness - 1/10*lightness));
+		var h = Math.round(rgbToHsl(rs,gs,bs)[0] * 359);
+		var s = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+		document.getElementById('backgroundColor').style.backgroundColor = 'rgb(' + rs + ',' + gs + ',' + bs + ')';
+		document.getElementById('colorField').style.boxShadow = '5px 5px 10px hsla(' + h + ',' + s + '%,' + boxShadow + '%,0.9)';
+	} else{
+		document.getElementById('backgroundColor').style.backgroundColor = 'white';
+	}
+}
+
+function setForegroundColor (){
+	var s = document.getElementById('foreground').checked;
+	if (!s){
+		document.querySelector('#colorField').style.color = 'white';
+	} else{
+		rs = document.getElementById('red').value;
+		gs = document.getElementById('green').value;
+		bs = document.getElementById('blue').value;
+		document.querySelector('#colorField').style.color = 'rgb(' + rs + ',' + gs + ',' + bs + ')';
+	}
+}
+
+function color(evt){
+	evt = (evt) ? evt :((window.event) ? window.event :"");
+	var elem = (evt.target) ? evt.target :evt.srcElement;
+	if (evt){
+		var eclass = elem.getAttribute('class');
+		if (eclass == 'rgb'){
+			document.getElementById('farbname').value = '';
+			document.getElementById('hex').value = '';
+			rs = document.getElementById('red').value;
+			gs = document.getElementById('green').value;
+			bs = document.getElementById('blue').value;
+
+			document.querySelector ('#r').value = rs;
+			document.querySelector ('#g').value = gs;
+			document.querySelector ('#b').value = bs;
+
+			// HSV-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hsvh').value = Math.round(rgbToHsv(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsvs').value = Math.round(rgbToHsv(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsvv').value = Math.round(rgbToHsv(rs,gs,bs)[2] * 100);
+
+			// HSV-Slider hue sat val ändern
+			document.querySelector ('#huev').value = rgbToHsv(rs,gs,bs)[0]*360;
+			document.querySelector ('#satv').value = rgbToHsv(rs,gs,bs)[1]*100;
+			document.querySelector ('#valv').value = rgbToHsv(rs,gs,bs)[2]*100;
+
+			// HSL-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hslh').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsls').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsll').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+
+			// HSL-Slider hue sat lig ändern
+			document.querySelector ('#hue').value = rgbToHsl(rs,gs,bs)[0]*360;
+			document.querySelector ('#sat').value = rgbToHsl(rs,gs,bs)[1]*100;
+			document.querySelector ('#lig').value = rgbToHsl(rs,gs,bs)[2]*100;
+
+			document.getElementById('hex').value = rgbToHex (rs,gs,bs);
+
+			if (rgbToName(rs,gs,bs)){
+				document.getElementById('farbname').value = rgbToName(rs,gs,bs);
+			}
+
+		} else if (eclass == 'hsl'){
+			document.getElementById('farbname').value = '';
+			document.getElementById('hex').value = '';
+			var h = document.getElementById('hue').value;
+			var s = document.getElementById('sat').value;
+			var l = document.getElementById('lig').value;
+
+			var rgb = hslToRgb(h/360,s/100,l/100);
+
+			rs = Math.round(rgb[0]);
+			gs = Math.round(rgb[1]);
+			bs = Math.round(rgb[2]);
+
+			document.getElementById('red').value = rs;
+			document.getElementById('green').value = gs;
+			document.getElementById('blue').value = bs;
+			
+			document.querySelector ('#r').value = rs;
+			document.querySelector ('#g').value = gs;
+			document.querySelector ('#b').value = bs;
+			
+			document.querySelector ('#hslh').value = h;
+			document.querySelector ('#hsls').value = s;
+			document.querySelector ('#hsll').value = l;
+
+			// HSV-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hsvh').value = h;
+			document.querySelector ('#hsvs').value = Math.round(rgbToHsv(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsvv').value = Math.round(rgbToHsv(rs,gs,bs)[2] * 100);
+
+			// HSV-Slider hue sat val ändern
+			document.querySelector ('#huev').value = h;
+			document.querySelector ('#satv').value = Math.round(rgbToHsv(rs,gs,bs)[1]*100);
+			document.querySelector ('#valv').value = Math.round(rgbToHsv(rs,gs,bs)[2]*100);
+
+			document.getElementById('hex').value = rgbToHex (rs,gs,bs);
+			if (rgbToName(rs,gs,bs)){
+				document.getElementById('farbname').value = rgbToName(rs,gs,bs);
+			}
+
+		} else if (eclass == 'hsv'){
+			document.getElementById('farbname').value = '';
+			document.getElementById('hex').value = '';
+
+			var h = document.getElementById('huev').value;
+			var s = document.getElementById('satv').value;
+			var v = document.getElementById('valv').value;
+
+			// HSV-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hsvh').value = h;
+			document.querySelector ('#hsvs').value = s;
+			document.querySelector ('#hsvv').value = v;
+
+			var rgb = hsvToRgb(h/360,s/100,v/100);
+
+			rs = Math.round(rgb[0]);
+			gs = Math.round(rgb[1]);
+			bs = Math.round(rgb[2]);
+			document.getElementById('red').value = rs;
+			document.getElementById('green').value = gs;
+			document.getElementById('blue').value = bs;
+
+			document.querySelector ('#r').value = rs;
+			document.querySelector ('#g').value = gs;
+			document.querySelector ('#b').value = bs;
+
+			// HSL-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hslh').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsls').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsll').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+
+			// HSL-Slider hue sat lig ändern
+			document.querySelector ('#hue').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#sat').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#lig').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+			document.getElementById('hex').value = rgbToHex (rs,gs,bs);
+			if (rgbToName(rs,gs,bs)){
+				document.getElementById('farbname').value = rgbToName(rs,gs,bs);
+			}
+		} else if (eclass == 'hex'){
+			document.getElementById('farbname').value = '';
+
+			rs = hexToRGB (document.getElementById('hex').value)[0];
+			gs = hexToRGB (document.getElementById('hex').value)[1];
+			bs = hexToRGB (document.getElementById('hex').value)[2];
+
+			document.getElementById('red').value = rs;
+			document.getElementById('green').value = gs;
+			document.getElementById('blue').value = bs;
+
+			document.querySelector ('#r').value = rs;
+			document.querySelector ('#g').value = gs;
+			document.querySelector ('#b').value = bs;
+
+			// HSL-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hslh').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsls').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsll').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+
+			// HSV-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hsvh').value = Math.round(rgbToHsv(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsvs').value = Math.round(rgbToHsv(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsvv').value = Math.round(rgbToHsv(rs,gs,bs)[2] * 100);
+
+			// HSL-Slider hue sat lig ändern
+			document.querySelector ('#hue').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#sat').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#lig').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+			if (rgbToName(rs,gs,bs)){
+				document.getElementById('farbname').value = rgbToName(rs,gs,bs);
+			}
+		} else if (eclass == 'farbname'){
+			document.getElementById('hex').value = '';
+			document.getElementById('red').value = rs;
+			document.getElementById('green').value = gs;
+			document.getElementById('blue').value = bs;
+
+			document.querySelector ('#r').value = rs;
+			document.querySelector ('#g').value = gs;
+			document.querySelector ('#b').value = bs;
+
+			// HSL-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hslh').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsls').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsll').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+
+			// HSV-Slider Ausgabe im Ausgabefeld
+			document.querySelector ('#hsvh').value = Math.round(rgbToHsv(rs,gs,bs)[0] * 360);
+			document.querySelector ('#hsvs').value = Math.round(rgbToHsv(rs,gs,bs)[1] * 100);
+			document.querySelector ('#hsvv').value = Math.round(rgbToHsv(rs,gs,bs)[2] * 100);
+
+			// HSL-Slider hue sat lig ändern
+			document.querySelector ('#hue').value = Math.round(rgbToHsl(rs,gs,bs)[0] * 360);
+			document.querySelector ('#sat').value = Math.round(rgbToHsl(rs,gs,bs)[1] * 100);
+			document.querySelector ('#lig').value = Math.round(rgbToHsl(rs,gs,bs)[2] * 100);
+
+			// Hex ändern
+			document.getElementById('hex').value = rgbToHex (rs,gs,bs);
+		}
+	}
+
+	document.querySelector('#colorField').setAttribute('style','background:rgb(' + rs + ',' + gs + ',' + bs + ')');
+	var scolor = 'rgb(' + rs + ',' + gs + ',' + bs + ')';
+	document.getElementById('sliderS').style.backgroundImage = '-webkit-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderS').style.backgroundImage = '-moz-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderS').style.backgroundImage = '-o-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderS').style.backgroundImage = '-ms-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderS').style.backgroundImage = 'linear-gradient(left,black 0%,' + scolor + ' 100%)';
+
+	document.getElementById('sliderL').style.backgroundImage = '-webkit-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderL').style.backgroundImage = '-moz-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderL').style.backgroundImage = '-o-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderL').style.backgroundImage = '-ms-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderL').style.backgroundImage = 'linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+
+	document.getElementById('sliderSV').style.backgroundImage = '-webkit-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderSV').style.backgroundImage = '-moz-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderSV').style.backgroundImage = '-o-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderSV').style.backgroundImage = '-ms-linear-gradient(left,black 0%,' + scolor + ' 100%)';
+	document.getElementById('sliderSV').style.backgroundImage = 'linear-gradient(left,black 0%,' + scolor + ' 100%)';
+
+	document.getElementById('sliderV').style.backgroundImage = '-webkit-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderV').style.backgroundImage = '-moz-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderV').style.backgroundImage = '-o-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderV').style.backgroundImage = '-ms-linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+	document.getElementById('sliderV').style.backgroundImage = 'linear-gradient(left,black 0%,' + scolor + ' 50%,white 100%)';
+
+}
+
+/**
+ * https://gist.github.com/mjijackson/5311256
+ * Converts an RGB color value to HSL. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and l in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSL representation
+ */
+function rgbToHsl(r, g, b){
+	r /= 255, g /= 255, b /= 255;
+	var max = Math.max(r, g, b), min = Math.min(r, g, b);
+	var h, s, l = (max + min) / 2;
+	if (max == min){
+		h = s = 0;// achromatic
+	} else{
+		var d = max - min;
+		s = l > 0.5 ? d / (2 - max - min) :d / (max + min);
+		switch (max){
+			case r:h = (g - b) / d + (g < b ? 6 :0);break;
+			case g:h = (b - r) / d + 2;break;
+			case b:h = (r - g) / d + 4;break;
+		}
+		h /= 6;
+	}
+	return [ h, s, l ];
+}
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  l       The lightness
+ * @return  Array           The RGB representation
+ */
+function hslToRgb(h, s, l){
+  var r, g, b;
+
+  if (s == 0){
+    r = g = b = l;// achromatic
+  } else{
+    function hue2rgb(p, q, t){
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    }
+
+    var q = l < 0.5 ? l * (1 + s) :l + s - l * s;
+    var p = 2 * l - q;
+
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+
+  return [ r * 255, g * 255, b * 255 ];
+}
+
+/**
+ * Converts an RGB color value to HSV. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and v in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSV representation
+ */
+function rgbToHsv(r, g, b){
+  r /= 255, g /= 255, b /= 255;
+
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, v = max;
+
+  var d = max - min;
+  s = max == 0 ? 0 :d / max;
+
+  if (max == min){
+    h = 0;// achromatic
+  } else{
+    switch (max){
+      case r:h = (g - b) / d + (g < b ? 6 :0);break;
+      case g:h = (b - r) / d + 2;break;
+      case b:h = (r - g) / d + 4;break;
+    }
+
+    h /= 6;
+  }
+
+  return [ h, s, v ];
+}
+
+/**
+ * Converts an HSV color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes h, s, and v are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  v       The value
+ * @return  Array           The RGB representation
+ */
+function hsvToRgb(h, s, v){
+  var r, g, b;
+
+  var i = Math.round(h * 6);
+  var f = h * 6 - i;
+  var p = v * (1 - s);
+  var q = v * (1 - f * s);
+  var t = v * (1 - (1 - f) * s);
+
+  switch (i % 6){
+    case 0:r = v, g = t, b = p;break;
+    case 1:r = q, g = v, b = p;break;
+    case 2:r = p, g = v, b = t;break;
+    case 3:r = p, g = q, b = v;break;
+    case 4:r = t, g = p, b = v;break;
+    case 5:r = v, g = p, b = q;break;
+  }
+
+  return [ r * 255, g * 255, b * 255 ];
+}
+
+// convert 0..255 R,G,B values to a hexidecimal color string
+function rgbToHex (r,g,b){
+    var bin = r << 16 | g << 8 | b;
+    return (function(h){
+        return new Array(7-h.length).join("0")+h
+    })(bin.toString(16).toUpperCase())
+}
+
+// convert a hexidecimal color string to 0..255 R,G,B
+function hexToRGB (hex){
+	//"#3FFFFF".log ('+++ hexToRGB ' + hex)
+	var rgb = [];
+	if (hex.length === 3){
+		hex = hex.replace(/([0-9a-f])/ig, '$1$1');
+	}
+	for (var i = 0;i<3;i++){
+		rgb.push(parseInt(hex.slice(i*2, (i+1)*2),16));
+	}
+	return rgb;
+}
+
+
+function nameToRGB(colorname){
+  // Alles in Kleinbuchstaben und alle Nicht-Buchstaben raus
+  colorname = colorname.toLowerCase().replace(/[^a-z]/g, '');
+  
+  // Gibt es eine passende Farbe
+  if(colors.hasOwnProperty(colorname)){
+      // Wenn ja, dann als RGB zurückgeben
+      // Neues array erzeugen, damit nicht das Original-Array zurückgegeben wird
+      return [colors[colorname][0], colors[colorname][1], colors[colorname][2]];
+  }
+  
+  // Default, falls eingegebener Farbname nicht gefunden
+  return false;
+}
+
+function rgbToName(r,g,b){
+	for (var key in colors){
+		if (colors[key][0] == r && colors[key][1] == g && colors[key][2] == b){
+			return key;
+		}
+	}
+	return false;
+}
+
+
+var colors ={
+aliceblue:[240, 248, 255],
+antiquewhite:[250, 235, 215],
+aqua:[0, 255, 255],
+aquamarine:[127, 255, 212],
+azure:[240, 255, 255],
+beige:[245, 245, 220],
+bisque:[255, 228, 196],
+black:[0, 0, 0],
+blanchedalmond:[255, 235, 205],
+blue:[0, 0, 255],
+blueviolet:[138, 43, 226],
+brown:[165, 42, 42],
+burlywood:[222, 184, 135],
+cadetblue:[95, 158, 160],
+chartreuse:[127, 255, 0],
+chocolate:[210, 105, 30],
+coral:[255, 127, 80],
+cornflowerblue:[100, 149, 237],
+cornsilk:[255, 248, 220],
+crimson:[220, 20, 60],
+cyan:[0, 255, 255],
+darkblue:[0, 0, 139],
+darkcyan:[0, 139, 139],
+darkgoldenrod:[184, 134, 11],
+darkgray:[169, 169, 169],
+darkgreen:[0, 100, 0],
+darkgrey:[169, 169, 169],
+darkkhaki:[189, 183, 107],
+darkmagenta:[139, 0, 139],
+darkolivegreen:[85, 107, 47],
+darkorange:[255, 140, 0],
+darkorchid:[153, 50, 204],
+darkred:[139, 0, 0],
+darksalmon:[233, 150, 122],
+darkseagreen:[143, 188, 143],
+darkslateblue:[72, 61, 139],
+darkslategray:[47, 79, 79],
+darkslategrey:[47, 79, 79],
+darkturquoise:[0, 206, 209],
+darkviolet:[148, 0, 211],
+deeppink:[255, 20, 147],
+deepskyblue:[0, 191, 255],
+dimgray:[105, 105, 105],
+dimgrey:[105, 105, 105],
+dodgerblue:[30, 144, 255],
+firebrick:[178, 34, 34],
+floralwhite:[255, 250, 240],
+forestgreen:[34, 139, 34],
+fuchsia:[255, 0, 255],
+gainsboro:[220, 220, 220],
+ghostwhite:[248, 248, 255],
+gold:[255, 215, 0],
+goldenrod:[218, 165, 32],
+gray:[128, 128, 128],
+green:[0, 128, 0],
+greenyellow:[173, 255, 47],
+grey:[128, 128, 128],
+honeydew:[240, 255, 240],
+hotpink:[255, 105, 180],
+indianred:[205, 92, 92],
+indigo:[75, 0, 130],
+ivory:[255, 255, 240],
+khaki:[240, 230, 140],
+lavender:[230, 230, 250],
+lavenderblush:[255, 240, 245],
+lawngreen:[124, 252, 0],
+lemonchiffon:[255, 250, 205],
+lightblue:[173, 216, 230],
+lightcoral:[240, 128, 128],
+lightcyan:[224, 255, 255],
+lightgoldenrodyellow:[250, 250, 210],
+lightgray:[211, 211, 211],
+lightgreen:[144, 238, 144],
+lightgrey:[211, 211, 211],
+lightpink:[255, 182, 193],
+lightsalmon:[255, 160, 122],
+lightseagreen:[32, 178, 170],
+lightskyblue:[135, 206, 250],
+lightslategray:[119, 136, 153],
+lightslategrey:[119, 136, 153],
+lightsteelblue:[176, 196, 222],
+lightyellow:[255, 255, 224],
+lime:[0, 255, 0],
+limegreen:[50, 205, 50],
+linen:[250, 240, 230],
+magenta:[255, 0, 255],
+maroon:[128, 0, 0],
+mediumaquamarine:[102, 205, 170],
+mediumblue:[0, 0, 205],
+mediumorchid:[186, 85, 211],
+mediumpurple:[147, 112, 216],
+mediumseagreen:[60, 179, 113],
+mediumslateblue:[123, 104, 238],
+mediumspringgreen:[0, 250, 154],
+mediumturquoise:[72, 209, 204],
+mediumvioletred:[199, 21, 133],
+midnightblue:[25, 25, 112],
+mintcream:[245, 255, 250],
+mistyrose:[255, 228, 225],
+moccasin:[255, 228, 181],
+navajowhite:[255, 222, 173],
+navy:[0, 0, 128],
+oldlace:[253, 245, 230],
+olive:[128, 128, 0],
+olivedrab:[107, 142, 35],
+orange:[255, 165, 0],
+orangered:[255, 69, 0],
+orchid:[218, 112, 214],
+palegoldenrod:[238, 232, 170],
+palegreen:[152, 251, 152],
+paleturquoise:[175, 238, 238],
+palevioletred:[216, 112, 147],
+papayawhip:[255, 239, 213],
+peachpuff:[255, 218, 185],
+peru:[205, 133, 63],
+pink:[255, 192, 203],
+plum:[221, 160, 221],
+powderblue:[176, 224, 230],
+purple:[128, 0, 128],
+red:[255, 0, 0],
+rosybrown:[188, 143, 143],
+royalblue:[65, 105, 225],
+saddlebrown:[139, 69, 19],
+salmon:[250, 128, 114],
+sandybrown:[244, 164, 96],
+seagreen:[46, 139, 87],
+seashell:[255, 245, 238],
+sienna:[160, 82, 45],
+silver:[192, 192, 192],
+skyblue:[135, 206, 235],
+slateblue:[106, 90, 205],
+slategray:[112, 128, 144],
+slategrey:[112, 128, 144],
+snow:[255, 250, 250],
+springgreen:[0, 255, 127],
+steelblue:[70, 130, 180],
+tan:[210, 180, 140],
+teal:[0, 128, 128],
+thistle:[216, 191, 216],
+tomato:[255, 99, 71],
+turquoise:[64, 224, 208],
+violet:[238, 130, 238],
+wheat:[245, 222, 179],
+white:[255, 255, 255],
+whitesmoke:[245, 245, 245],
+yellow:[255, 255, 0],
+yellowgreen:[154, 205, 50]
+};
+
+/**
+function rgbToHex(r, g, b){
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+**/
+
+</script>
+
+</body>
+</html>
+
+
